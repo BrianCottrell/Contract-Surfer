@@ -15,6 +15,11 @@ body {
   background: #E16600 !important;
 }
 
+.success-text {
+  color: green;
+  font-size: 20px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

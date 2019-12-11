@@ -3,6 +3,8 @@ import { Button, Typography, Grid, TextField } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 
 import MyContract from "./contracts/MyContract.json";
+import ReactTooltip from 'react-tooltip'
+
 import getWeb3 from "./utils/getWeb3";
 
 import { theme } from "./utils/theme";
@@ -13,18 +15,23 @@ import "./App.css";
 
 const GAS = 500000;
 const GAS_PRICE = "20000000000";
+const REQUEST_INFO_TEXT = `This will tie 4 location transactions for today's forecast to the Contract Surfer blockchain`
 
 const getFeetFromResult = (result) => Number(result.slice(6, 8)) / 10
+
+const INITIAL_LOCATION_STATE = {
+  location1: "33.878727, -118.427179",
+  location2: "33.148605, -117.353412",
+  location3: "33.878727, -118.427179",
+  location4: "33.148605, -117.353412"
+}
 
 class App extends Component {
   state = {
     web3: null,
     accounts: null,
+    ...INITIAL_LOCATION_STATE,
     contract: null,
-    location1: "33.878727, -118.427179",
-    location2: "33.148605, -117.353412",
-    location3: "33.878727, -118.427179",
-    location4: "33.148605, -117.353412",
     resultReceived: false,
     result: "0"
   };
@@ -92,6 +99,7 @@ class App extends Component {
 
   handleRequestResult = async () => {
     const locations = this.getLocations()
+    // TODO: group into one transaction or make parallel.
     for (var i = 0; i < locations.length; i ++) { 
       console.log('requesting', locations[i], i)
       const requestId = await this.state.contract.methods.makeRequest(locations[i].toString(), i).send({ from: this.state.accounts[0], gas: GAS, gasPrice: GAS_PRICE });
@@ -100,9 +108,10 @@ class App extends Component {
   };
 
   handleResetResult = async () => {
-    await this.state.contract.methods
-      .resetResult()
-      .send({ from: this.state.accounts[0], gas: GAS, gasPrice: GAS_PRICE });
+    this.setState({...INITIAL_LOCATION_STATE})
+    // await this.state.contract.methods
+    //   .resetResult()
+    //   .send({ from: this.state.accounts[0], gas: GAS, gasPrice: GAS_PRICE });
   };
 
 
@@ -132,6 +141,7 @@ class App extends Component {
     const bestResult = Math.max(...parsedResults)
     return (
       <ThemeProvider theme={theme}>
+        <ReactTooltip />
         <div className="App">
           <Header />
 
@@ -222,9 +232,9 @@ class App extends Component {
 
           {hasAllResults && <div>
             <Typography variant="h5" style={{ marginTop: 32 }}>
-                {`Best Result: ${bestResult} Feet`}
+                Best Result: <b>{`${bestResult} Feet at Location ${parsedResults.indexOf(bestResult) + 1}`}</b>
             </Typography>
-            <p>Looks like some good waves ahead</p>
+            <p className='success-text'>Looks like some good waves ahead.</p>
           </div>}
 
           <Grid container style={{ marginTop: 32 }}>
@@ -234,11 +244,13 @@ class App extends Component {
                 color="primary"
                 onClick={() => this.handleResetResult()}
               >
-                Reset Result
+                Reset Inputs
               </Button>
             </Grid>
             <Grid item xs>
               <Button
+                data-place='top'
+                data-tip={REQUEST_INFO_TEXT}
                 variant="contained"
                 color="primary"
                 onClick={() => this.handleRequestResult()}
