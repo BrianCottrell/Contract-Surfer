@@ -7,6 +7,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.header-logo {
+  margin-top: 25px;
+}
+
+.orange, .MuiButton-containedPrimary {
+  background: #E16600 !important;
+}
+
+.success-text {
+  color: green;
+  font-size: 20px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

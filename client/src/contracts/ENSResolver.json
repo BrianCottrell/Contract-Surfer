@@ -27,19 +27,19 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity 0.4.24;\n\ncontract ENSResolver {\n  function addr(bytes32 node) public view returns (address);\n}\n",
-  "sourcePath": "C:\\Users\\Brian\\Projects\\Honeycomb\\React\\workshop-honeycomb-react\\node_modules\\chainlink\\contracts\\vendor\\ENSResolver.sol",
+  "sourcePath": "/Users/chrisbuonocore/personal/hackathons/honey19/contract-surfer/node_modules/chainlink/contracts/vendor/ENSResolver.sol",
   "ast": {
-    "absolutePath": "/C/Users/Brian/Projects/Honeycomb/React/workshop-honeycomb-react/node_modules/chainlink/contracts/vendor/ENSResolver.sol",
+    "absolutePath": "/Users/chrisbuonocore/personal/hackathons/honey19/contract-surfer/node_modules/chainlink/contracts/vendor/ENSResolver.sol",
     "exportedSymbols": {
       "ENSResolver": [
-        1867
+        1858
       ]
     },
-    "id": 1868,
+    "id": 1859,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1859,
+        "id": 1850,
         "literals": [
           "solidity",
           "0.4",
@@ -54,9 +54,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1867,
+        "id": 1858,
         "linearizedBaseContracts": [
-          1867
+          1858
         ],
         "name": "ENSResolver",
         "nodeType": "ContractDefinition",
@@ -64,7 +64,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1866,
+            "id": 1857,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -72,15 +72,15 @@
             "name": "addr",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1862,
+              "id": 1853,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1861,
+                  "id": 1852,
                   "name": "node",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1866,
+                  "scope": 1857,
                   "src": "64:12:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -89,7 +89,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1860,
+                    "id": 1851,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "64:7:10",
@@ -106,15 +106,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 1865,
+              "id": 1856,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1864,
+                  "id": 1855,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1866,
+                  "scope": 1857,
                   "src": "99:7:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -123,7 +123,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1863,
+                    "id": 1854,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "99:7:10",
@@ -138,31 +138,31 @@
               ],
               "src": "98:9:10"
             },
-            "scope": 1867,
+            "scope": 1858,
             "src": "50:58:10",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1868,
+        "scope": 1859,
         "src": "25:85:10"
       }
     ],
     "src": "0:111:10"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/Brian/Projects/Honeycomb/React/workshop-honeycomb-react/node_modules/chainlink/contracts/vendor/ENSResolver.sol",
+    "absolutePath": "/Users/chrisbuonocore/personal/hackathons/honey19/contract-surfer/node_modules/chainlink/contracts/vendor/ENSResolver.sol",
     "exportedSymbols": {
       "ENSResolver": [
-        1867
+        1858
       ]
     },
-    "id": 1868,
+    "id": 1859,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1859,
+        "id": 1850,
         "literals": [
           "solidity",
           "0.4",
@@ -177,9 +177,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1867,
+        "id": 1858,
         "linearizedBaseContracts": [
-          1867
+          1858
         ],
         "name": "ENSResolver",
         "nodeType": "ContractDefinition",
@@ -187,7 +187,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1866,
+            "id": 1857,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -195,15 +195,15 @@
             "name": "addr",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1862,
+              "id": 1853,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1861,
+                  "id": 1852,
                   "name": "node",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1866,
+                  "scope": 1857,
                   "src": "64:12:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -212,7 +212,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1860,
+                    "id": 1851,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "64:7:10",
@@ -229,15 +229,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 1865,
+              "id": 1856,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1864,
+                  "id": 1855,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1866,
+                  "scope": 1857,
                   "src": "99:7:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -246,7 +246,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1863,
+                    "id": 1854,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "99:7:10",
@@ -261,14 +261,14 @@
               ],
               "src": "98:9:10"
             },
-            "scope": 1867,
+            "scope": 1858,
             "src": "50:58:10",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1868,
+        "scope": 1859,
         "src": "25:85:10"
       }
     ],
@@ -280,7 +280,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.19",
-  "updatedAt": "2019-12-11T02:28:17.916Z",
+  "updatedAt": "2019-12-11T13:05:24.153Z",
   "devdoc": {
     "methods": {}
   },
