@@ -6,8 +6,9 @@ contract MyContract is ChainlinkClient{
     uint256 private oraclePaymentAmount;
     bytes32 private jobId;
 
-    bool public resultReceived;
-    bytes32 public result;
+    mapping (int => bool) public resultReceived;
+    mapping (int => bytes32) public result;
+    mapping (bytes32 => int) public requestMap;
 
     constructor(
         address _link,
@@ -23,25 +24,28 @@ contract MyContract is ChainlinkClient{
         oraclePaymentAmount = _oraclePaymentAmount;
     }
 
-    function makeRequest(string location) external returns (bytes32 requestId)
+    function makeRequest(string location, int resultNumber) external returns (bytes32 requestId)
     {
         Chainlink.Request memory req = buildChainlinkRequest(jobId, this, this.fulfill.selector);
         req.add("q", location);
         req.add("copyPath", "data.weather.6.hourly.2.swellHeight_ft");
         requestId = sendChainlinkRequestTo(chainlinkOracleAddress(), req, oraclePaymentAmount);
+        requestMap[requestId] = resultNumber;
     }
 
-    function resetResult() external
-    {
-        resultReceived = false;
-        result = 0;
+    function getResult(int resultNumber) public view returns (bytes32 res) {
+        res = result[resultNumber];
+    }
+
+   function getResultReceived(int resultNumber) public view returns (bool res) {
+        res = resultReceived[resultNumber];
     }
 
     function fulfill(bytes32 _requestId, bytes32 _result)
     public
     recordChainlinkFulfillment(_requestId)
     {
-        resultReceived = true;
-        result = _result;
+        resultReceived[requestMap[_requestId]] = true;
+        result[requestMap[_requestId]] = _result;
     }
 }

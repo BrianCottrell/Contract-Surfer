@@ -6,11 +6,15 @@ import MyContract from "./contracts/MyContract.json";
 import getWeb3 from "./utils/getWeb3";
 
 import { theme } from "./utils/theme";
+import logo from './assets/logo.png'
 import Header from "./components/Header";
+
 import "./App.css";
 
 const GAS = 500000;
 const GAS_PRICE = "20000000000";
+
+const getFeetFromResult = (result) => Number(result.slice(6, 8)) / 10
 
 class App extends Component {
   state = {
@@ -52,7 +56,7 @@ class App extends Component {
       const component = this;
       async function loopRefresh() {
         await component.refreshState();
-        setTimeout(loopRefresh, 1000);
+        setTimeout(loopRefresh, 2000);
       }
       loopRefresh();
     } catch (error) {
@@ -63,14 +67,23 @@ class App extends Component {
     }
   };
 
+  getLocations = () => {
+    const {location1, location2, location3, location4} = this.state
+    return [location1, location2, location3, location4]
+  }
+
   refreshState = async () => {
-    const resultReceived = await this.state.contract.methods
-      .resultReceived()
-      .call();
-    const result = (
-      await this.state.contract.methods.result().call()
-    ).toString();
+    const resultReceived = {}
+    const result = {}
+    const locations = this.getLocations()
+    for (var i = 0; i < locations.length; i ++) {
+      const received_i = await this.state.contract.methods.getResultReceived(i).call();
+      const result_i = (await this.state.contract.methods.getResult(i).call()).toString();
+      resultReceived[i] = received_i
+      result[i] = result_i
+    }
     this.setState({ resultReceived, result });
+    // console.group('refresh', resultReceived, result)
   };
 
   handleUpdateForm = (name, value) => {
@@ -78,9 +91,12 @@ class App extends Component {
   };
 
   handleRequestResult = async () => {
-    await this.state.contract.methods
-      .makeRequest(this.state.location1.toString())
-      .send({ from: this.state.accounts[0], gas: GAS, gasPrice: GAS_PRICE });
+    const locations = this.getLocations()
+    for (var i = 0; i < locations.length; i ++) { 
+      console.log('requesting', locations[i], i)
+      const requestId = await this.state.contract.methods.makeRequest(locations[i].toString(), i).send({ from: this.state.accounts[0], gas: GAS, gasPrice: GAS_PRICE });
+      console.log('requested', requestId)
+    }
   };
 
   handleResetResult = async () => {
@@ -88,6 +104,7 @@ class App extends Component {
       .resetResult()
       .send({ from: this.state.accounts[0], gas: GAS, gasPrice: GAS_PRICE });
   };
+
 
   render() {
     if (!this.state.web3) {
@@ -101,11 +118,24 @@ class App extends Component {
         </ThemeProvider>
       );
     }
+
+    const {result, resultReceived} = this.state
+    const locations = this.getLocations()
+    const parsedResults = []
+    locations.map((loc, i) => {
+      if (result[i]) {
+        parsedResults.push(parseFloat(getFeetFromResult(result[i])))
+      }
+    })
+    const hasAllResults = Object.values(resultReceived || {}).every(x => x)
+    console.log('parsed', parsedResults)
+    const bestResult = Math.max(...parsedResults)
     return (
       <ThemeProvider theme={theme}>
         <div className="App">
           <Header />
 
+          <img src={logo} className='header-logo'/>
           <Typography variant="h5" style={{ marginTop: 32 }}>
             {`Please enter the surf venue locations you would like to select from`}
           </Typography>
@@ -181,14 +211,21 @@ class App extends Component {
               />
             </Grid>
           </Grid>
-
+            
           <Typography variant="h5" style={{ marginTop: 32 }}>
-            {`Result received: ${this.state.resultReceived}`}
+            {`Results ready: ${JSON.stringify(resultReceived)}`}
           </Typography>
 
           <Typography variant="h5" style={{ marginTop: 32 }}>
-            {`Result: ${Number(this.state.result.slice(6, 8)) / 10} Feet`}
+            {`Results: ${JSON.stringify(parsedResults)} Feet`}
           </Typography>
+
+          {hasAllResults && <div>
+            <Typography variant="h5" style={{ marginTop: 32 }}>
+                {`Best Result: ${bestResult} Feet`}
+            </Typography>
+            <p>Looks like some good waves ahead</p>
+          </div>}
 
           <Grid container style={{ marginTop: 32 }}>
             <Grid item xs>

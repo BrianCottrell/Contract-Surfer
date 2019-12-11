@@ -5,6 +5,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 
+import logo from '../assets/logo.png'
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1
@@ -16,11 +18,11 @@ export default function Header() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static">
         <Toolbar>
           <Grid item xs>
             <Typography variant="h6" color="inherit">
-              Contract Surfer
+              {/* Contract Surfer */}
             </Typography>
           </Grid>
         </Toolbar>

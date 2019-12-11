@@ -7,6 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.header-logo {
+  margin-top: 25px;
+}
+
+.orange, .MuiButton-containedPrimary {
+  background: #E16600 !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
