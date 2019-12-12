@@ -120,7 +120,7 @@ class App extends Component {
   _onClickMap(map, evt) {
     const locations = this.getLocations()
     const {curIndex} = this.state
-    const loc = `${evt.lngLat.lat}, ${evt.lngLat.lat}`
+    const loc = `${parseFloat(evt.lngLat.lat).toFixed(6)}, ${parseFloat(evt.lngLat.lng).toFixed(6)}`
     console.log('clicked', loc);
     switch (curIndex % locations.length) {
       case 0:
@@ -192,7 +192,7 @@ class App extends Component {
                     marginTop: 60
                 }}
                 center={[-118.427179, 33.878727]}
-                zoom={[9]}
+                zoom={[10]}
                 onClick={(a, b) => this._onClickMap(a, b)}/>
 
           <Grid container style={{ marginTop: 32 }}>
