@@ -42,6 +42,8 @@ class App extends Component {
     ...INITIAL_LOCATION_STATE,
     contract: null,
     curIndex: 0,
+    center: [-118.427179, 33.878727],
+    zoom: [10],
     resultReceived: false,
     result: "0"
   };
@@ -162,7 +164,7 @@ class App extends Component {
       );
     }
 
-    const {result, resultReceived} = this.state
+    const {result, resultReceived, center, zoom} = this.state
     const locations = this.getLocations()
     const parsedResults = []
     locations.map((loc, i) => {
@@ -188,12 +190,24 @@ class App extends Component {
                 style="mapbox://styles/mapbox/outdoors-v10"
                 containerStyle={{
                     height: 400,
-                    width: "100vw",
+                    width: "70vw",
+                    marginLeft: "15vw",
                     marginTop: 60
                 }}
-                center={[-118.427179, 33.878727]}
-                zoom={[10]}
-                onClick={(a, b) => this._onClickMap(a, b)}/>
+                center={center}
+                zoom={zoom}
+                onClick={(a, b) => this._onClickMap(a, b)}>
+
+            <Layer
+            type="circle" radius={30} color={ 'red'} fillColor= 'red' fillOpacity= {1}>
+                {/* <Feature coordinates={[-118.427179, 33.878727]}></Feature> */}
+              {this.getLocations().map((point, i) => {
+                point = point.split(',').map(parseFloat).reverse()
+                return <Feature key={i} coordinates={point} />
+              })}
+            </Layer>
+
+            </Map>
 
           <Grid container style={{ marginTop: 32 }}>
             <Grid item xs>
