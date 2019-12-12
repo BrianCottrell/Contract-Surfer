@@ -3,6 +3,8 @@ import { Button, Typography, Grid, TextField } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 
 import MyContract from "./contracts/MyContract.json";
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+
 import ReactTooltip from 'react-tooltip'
 
 import getWeb3 from "./utils/getWeb3";
@@ -10,6 +12,7 @@ import getWeb3 from "./utils/getWeb3";
 import { theme } from "./utils/theme";
 import logo from './assets/logo.png'
 import Header from "./components/Header";
+
 
 import "./App.css";
 
@@ -26,12 +29,19 @@ const INITIAL_LOCATION_STATE = {
   location4: "34.259463, -119.290774"
 }
 
+const Map = ReactMapboxGl({
+  accessToken:
+    'pk.eyJ1IjoiY3NuIiwiYSI6ImNpdnRvam1qeDAwMXgyenRlZjZiZWc1a2wifQ.Gr5pLJzG-1tucwY4h-rGdA'
+});
+
+
 class App extends Component {
   state = {
     web3: null,
     accounts: null,
     ...INITIAL_LOCATION_STATE,
     contract: null,
+    curIndex: 0,
     resultReceived: false,
     result: "0"
   };
@@ -107,6 +117,30 @@ class App extends Component {
     }
   };
 
+  _onClickMap(map, evt) {
+    const locations = this.getLocations()
+    const {curIndex} = this.state
+    const loc = `${evt.lngLat.lat}, ${evt.lngLat.lat}`
+    console.log('clicked', loc);
+    switch (curIndex % locations.length) {
+      case 0:
+        this.setState({location1: loc})
+        break
+      case 1:
+        this.setState({location2: loc})
+        break
+      case 2:
+        this.setState({location3: loc})
+        break
+      case 3:
+        this.setState({location4: loc})
+        break
+    }
+
+    this.setState({curIndex: curIndex + 1})
+
+  }
+
   handleResetResult = async () => {
     this.setState({...INITIAL_LOCATION_STATE})
     // await this.state.contract.methods
@@ -146,9 +180,20 @@ class App extends Component {
           <Header />
 
           <img src={logo} className='header-logo'/>
+
           <Typography variant="h5" style={{ marginTop: 32 }}>
-            {`Please enter the surf venue locations you would like to select from`}
+            {`Please click the surf venue locations you would like to select from`}
           </Typography>
+          <Map
+                style="mapbox://styles/mapbox/outdoors-v10"
+                containerStyle={{
+                    height: 400,
+                    width: "100vw",
+                    marginTop: 60
+                }}
+                center={[-118.427179, 33.878727]}
+                zoom={[9]}
+                onClick={(a, b) => this._onClickMap(a, b)}/>
 
           <Grid container style={{ marginTop: 32 }}>
             <Grid item xs>
