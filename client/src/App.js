@@ -173,7 +173,6 @@ class App extends Component {
       }
     })
     const hasAllResults = Object.values(resultReceived || {}).every(x => x)
-    console.log('parsed', parsedResults)
     const bestResult = Math.max(...parsedResults)
     return (
       <ThemeProvider theme={theme}>
