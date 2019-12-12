@@ -177,12 +177,12 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <ReactTooltip />
-        <div className="App">
+        <div className="App" style={{background: "#e0c592"}}>
           <Header />
 
           <img src={logo} className='header-logo'/>
 
-          <Typography variant="h5" style={{ marginTop: 32 }}>
+          <Typography variant="h5" style={{ marginTop: 12 }}>
             {`Please click the surf venue locations you would like to select from`}
           </Typography>
           <Map
@@ -191,7 +191,7 @@ class App extends Component {
                     height: 400,
                     width: "70vw",
                     marginLeft: "15vw",
-                    marginTop: 60
+                    marginTop: 20
                 }}
                 center={center}
                 zoom={zoom}
@@ -208,7 +208,7 @@ class App extends Component {
 
             </Map>
 
-          <Grid container style={{ marginTop: 32 }}>
+          <Grid container style={{ marginTop: 12 }}>
             <Grid item xs>
               <Typography variant="h5" style={{ marginTop: 32 }}>
                 Location 1
@@ -296,15 +296,6 @@ class App extends Component {
           </div>}
 
           <Grid container style={{ marginTop: 32 }}>
-            <Grid item xs>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => this.handleResetResult()}
-              >
-                Reset Inputs
-              </Button>
-            </Grid>
             <Grid item xs>
               <Button
                 data-place='top'
