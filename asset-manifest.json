@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/contract-surfer/static/css/main.6ab70c88.chunk.css",
+    "main.js": "/contract-surfer/static/js/main.958dc2f1.chunk.js",
+    "main.js.map": "/contract-surfer/static/js/main.958dc2f1.chunk.js.map",
+    "runtime-main.js": "/contract-surfer/static/js/runtime-main.2743a7cd.js",
+    "runtime-main.js.map": "/contract-surfer/static/js/runtime-main.2743a7cd.js.map",
+    "static/js/2.1d5f0493.chunk.js": "/contract-surfer/static/js/2.1d5f0493.chunk.js",
+    "static/js/2.1d5f0493.chunk.js.map": "/contract-surfer/static/js/2.1d5f0493.chunk.js.map",
+    "index.html": "/contract-surfer/index.html",
+    "precache-manifest.bfd564e02ff4dfdab4bccda614c32e94.js": "/contract-surfer/precache-manifest.bfd564e02ff4dfdab4bccda614c32e94.js",
+    "service-worker.js": "/contract-surfer/service-worker.js",
+    "static/css/main.6ab70c88.chunk.css.map": "/contract-surfer/static/css/main.6ab70c88.chunk.css.map",
+    "static/media/logo.png": "/contract-surfer/static/media/logo.4cc13249.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2743a7cd.js",
+    "static/js/2.1d5f0493.chunk.js",
+    "static/css/main.6ab70c88.chunk.css",
+    "static/js/main.958dc2f1.chunk.js"
+  ]
+}
