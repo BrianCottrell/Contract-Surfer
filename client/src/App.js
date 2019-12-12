@@ -22,8 +22,8 @@ const getFeetFromResult = (result) => Number(result.slice(6, 8)) / 10
 const INITIAL_LOCATION_STATE = {
   location1: "33.878727, -118.427179",
   location2: "33.148605, -117.353412",
-  location3: "33.878727, -118.427179",
-  location4: "33.148605, -117.353412"
+  location3: "34.406441, -119.836861",
+  location4: "34.259463, -119.290774"
 }
 
 class App extends Component {
